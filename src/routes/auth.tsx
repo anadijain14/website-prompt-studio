@@ -14,9 +14,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 type Mode = "signin" | "signup";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    mode: search.mode === "signup" ? ("signup" as const) : ("signin" as const),
-    redirect: typeof search.redirect === "string" ? search.redirect : undefined,
+  validateSearch: (search: Record<string, unknown>): { mode: Mode; redirect?: string } => ({
+    mode: search["mode"] === "signup" ? "signup" : "signin",
+    redirect: typeof search["redirect"] === "string" ? search["redirect"] : undefined,
   }),
   ssr: false,
   component: AuthPage,

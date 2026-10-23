@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,12 +21,12 @@ function ResetPasswordPage() {
   const [invalid, setInvalid] = useState(false);
 
   // Recovery links arrive as #access_token=...&type=recovery — hydrate the session.
-  useState(() => {
+  useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) setReady(true);
       else setInvalid(true);
     });
-  });
+  }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
