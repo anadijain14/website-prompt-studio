@@ -24,7 +24,7 @@ interface TopbarProps {
   onMobileClose: () => void;
 }
 
-export function AppTopbar({ onQuickAdd }: TopbarProps) {
+export function AppTopbar({ onQuickAdd, onMobileMenu }: TopbarProps) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null);
@@ -52,10 +52,7 @@ export function AppTopbar({ onQuickAdd }: TopbarProps) {
         <button
           aria-label="Open navigation"
           className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground md:hidden"
-          onClick={() => {
-            // dispatch a custom event the layout listens to
-            window.dispatchEvent(new CustomEvent("focusflow:open-mobile-nav"));
-          }}
+          onClick={onMobileMenu}
         >
           <Menu className="h-5 w-5" />
         </button>

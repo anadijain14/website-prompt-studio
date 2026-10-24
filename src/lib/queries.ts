@@ -129,11 +129,6 @@ export const pipelineRunsQuery = () =>
       ),
   });
 
-/* ------------------------------- mutations -------------------------------- */
-
-export async function invalidateAfter(userId: string, keys: string[][]) {
-  return keys;
-}
 
 export function todayISO(): string {
   const now = new Date();
